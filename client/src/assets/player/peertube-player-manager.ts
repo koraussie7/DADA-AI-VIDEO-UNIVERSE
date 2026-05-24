@@ -22,7 +22,7 @@ import './videojs-components/settings-panel-child'
 import './videojs-components/theater-button'
 import './playlist/playlist-plugin'
 import videojs from 'video.js'
-import { HlsJsEngineSettings } from '@peertube/p2p-media-loader-hlsjs'
+import { HlsJsEngineSettings } from 'p2p-media-loader-hlsjs'
 import { PluginsManager } from '@root-helpers/plugins-manager'
 import { buildVideoLink, decorateVideoLink } from '@shared/core-utils'
 import { isDefaultLocale } from '@shared/core-utils/i18n'
@@ -150,7 +150,7 @@ export class PeertubePlayerManager {
     if (mode === 'webtorrent') await import('./webtorrent/webtorrent-plugin')
     if (mode === 'p2p-media-loader') {
       [ p2pMediaLoader ] = await Promise.all([
-        import('@peertube/p2p-media-loader-hlsjs'),
+        import('p2p-media-loader-hlsjs'),
         import('./p2p-media-loader/p2p-media-loader-plugin')
       ])
     }
