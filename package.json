@@ -70,6 +70,7 @@
     "markdown-it": "^12.0.4",
     "markdown-it-emoji": "^2.0.0",
     "memoizee": "^0.4.14",
+    "minima-js": "file:../client/src/assets/minima-wasm",
     "morgan": "^1.5.3",
     "multer": "^1.1.0",
     "node-fetch": "^2.6.0",
@@ -100,7 +101,6 @@
     "useragent": "^2.3.0",
     "validator": "^13.0.0",
     "webfinger.js": "^2.6.6",
-    "webtorrent": "^1.0.0",
     "winston": "3.3.3",
     "ws": "^8.0.0",
     "youtube-dl": "^3.0.2"
@@ -144,7 +144,6 @@
     "@types/request": "^2.0.3",
     "@types/supertest": "^2.0.3",
     "@types/validator": "^13.0.0",
-    "@types/webtorrent": "^0.109.0",
     "@types/ws": "^7.2.1",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "autocannon": "^7.0.4",
