@@ -1,5 +1,6 @@
 import './buffer';
 import './minima';
+import './rewards';
 import jQuery from 'jquery';
 import fetch from 'unfetch';
 

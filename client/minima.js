@@ -121,6 +121,59 @@ async function rewardTokens(toAddress, amount, memo) {
   }
 }
 
+
+
+// ── DADAPOINT 토큰 조회 / 전송 ──
+async function getDADABalance(address) {
+  return mds("balance", { address, tokenid: DADAPOINT_TOKEN_COIN });
+}
+
+async function getDADASupply() {
+  try {
+    const res = await fetch(`${MINIMA_RPC_HOST}/minima/coin?coinid=${DADAPOINT_TOKEN_COIN}`);
+    const json = await res.json();
+    return json && json.coins ? json.coins.length : 0;
+  } catch(e) { return 0; }
+}
+
+async function transferTokens(fromAddress, toAddress, amount, memo) {
+  // Delegate to DADA API server for secure signing
+  try {
+    const res = await fetch("/reward/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: fromAddress,
+        to: toAddress,
+        amount: parseFloat(amount),
+        token: DADAPOINT_TOKEN_COIN,
+        memo: memo || ""
+      })
+    });
+    return await res.json();
+  } catch(e) { return { error: e.message }; }
+}
+
+// ── avalon 호환 함수 (chain users 등) ──
+async function getBlockHeight() {
+  try {
+    const res = await fetch(`${MINIMA_RPC_HOST}/minima/block`);
+    const json = await res.json();
+    return json?.block?.chainheight || 0;
+  } catch(e) { return 0; }
+}
+
+// ── 조회수 기반 DADAPOINT 보상 계산 ──
+async function calculateViewReward(videoId) {
+  const views = await mds("MDS_select", {
+    data: JSON.stringify({ videoId, type: "view" }),
+    scope: "DADA_REACTION"
+  });
+  const viewCount = Array.isArray(views) ? views.length : 0;
+  // 1000 views = 1 DADAPOINT
+  return Math.floor(viewCount / 1000);
+}
+
 // ── 글로벌 객체로 노출 (avalon.js 대체) ──
 window.minima = {
   config: { host: MINIMA_MDS_HOST, coin: DADAPOINT_TOKEN_COIN },
@@ -143,6 +196,11 @@ window.minima = {
 
   // 토큰
   rewardTokens,
+  getDADABalance,
+  getDADASupply,
+  transferTokens,
+  getBlockHeight,
+  calculateViewReward,
   DADAPOINT_TOKEN_COIN,
 
   // 유틸
