@@ -70,7 +70,7 @@
     "markdown-it": "^12.0.4",
     "markdown-it-emoji": "^2.0.0",
     "memoizee": "^0.4.14",
-    "minima-js": "file:../client/src/assets/minima-wasm",
+    "minima-js": "file:./client/src/assets/minima-wasm",
     "morgan": "^1.5.3",
     "multer": "^1.1.0",
     "node-fetch": "^2.6.0",
