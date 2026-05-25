@@ -1,0 +1,6 @@
+[submodule "p2p-media-loader"]
+	path = p2p-media-loader
+	url = https://github.com/Novage/p2p-media-loader.git
+[submodule "snail"]
+	path = snail
+	url = https://github.com/acgist/snail.git
