@@ -25,19 +25,19 @@ Template.settings.helpers({
       return Session.get('remoteSettings').BlurtAPINodes
     },
     CurrentAPI: function() {
-      return Session.get('steemAPI');
+      return Session.get('minimaAPI');
     },
     CurrentAvalonAPI: function() {
       return Session.get('avalonAPI')
     },
     CurrentHiveAPI: () => {
-        return Session.get('hiveAPI')
+        return Session.get('minimaAPI')
     },
     CurrentBlurtAPI: () => {
-      return Session.get('blurtAPI')
+      return Session.get('minimaAPI')
     },
     CurrentSteemAPI: () => {
-        return Session.get('steemAPI')
+        return Session.get('minimaAPI')
     },
     displayNodes: function() {
       return Session.get('remoteSettings').displayNodes;
@@ -77,22 +77,22 @@ Template.settings.events({
         localStorage.setItem('avalonAPI',value)
     },
     'change #steemApi': function(event) {
-        var value = $('#steemApi').val()
-        steem.api.setOptions({ url: value, useAppbaseApi: true })
+        var value = $('#minimaApi').val()
+        /* steem.api.setOptions disabled */({ url: value, useAppbaseApi: true })
         Session.set('steemAPI', value)
-        localStorage.setItem('steemAPI', value)
+        localStorage.setItem('minimaAPI', value)
     },
     'change #hiveApi': function(event) {
-        var value = $('#hiveApi').val()
-        hive.api.setOptions({ url: value, useAppbaseApi: true })
+        var value = $('#minimaApi').val()
+        /* hive.api.setOptions disabled */({ url: value, useAppbaseApi: true })
         Session.set('hiveAPI', value)
-        localStorage.setItem('hiveAPI', value)
+        localStorage.setItem('minimaAPI', value)
     },
     'change #blurtApi': function(event) {
-      var value = $('#blurtApi').val()
-      blurt.api.setOptions({ url: value, useAppbaseApi: true })
+      var value = $('#minimaApi').val()
+      /* blurt.api.setOptions disabled */({ url: value, useAppbaseApi: true })
       Session.set('blurtAPI', value)
-      localStorage.setItem('blurtAPI', value)
+      localStorage.setItem('minimaAPI', value)
     },
     'change #nsfwSetting': function(event) {
         let value = $('#nsfwSetting').prop('selectedIndex')

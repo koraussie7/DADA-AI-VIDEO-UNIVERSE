@@ -32,12 +32,12 @@ Template.channelkeys.helpers({
         return Session.get('keyQRCode')
     },
     'loggedInPub': function(){
-        var priv = Users.findOne({network: 'avalon', username: FlowRouter.getParam("author")}).privatekey
+        var priv = Users.findOne({network: 'minima', username: FlowRouter.getParam("author")}).privatekey
         if (!priv) return
         return avalon.privToPub(priv)
     },
     'loggedInPriv': function(){
-        return Users.findOne({network: 'avalon', username: FlowRouter.getParam("author")}).privatekey
+        return Users.findOne({network: 'minima', username: FlowRouter.getParam("author")}).privatekey
     },
     'transactionTypes': function(){
         types = []
@@ -72,7 +72,7 @@ Template.channelkeys.events({
     'click .deleteKeyButton': function(e) {
         e.preventDefault()
         var oldKeyId = e.target.dataset.key
-        broadcast.avalon.removeKey(oldKeyId, function(err, res) {
+        broadcast.removeKey(oldKeyId, function(err, res) {
             if (err)
                 Meteor.blockchainError(err)
             else {
@@ -91,7 +91,7 @@ Template.channelkeys.events({
             if (!$('.transactionType')[key].checked) continue
             txTypes.push(parseInt($('.transactionType')[key].dataset.txid))
         }
-        broadcast.avalon.newKey(newKeyId, newKeyPub, txTypes, function(err, res) {
+        broadcast.newKey(newKeyId, newKeyPub, txTypes, function(err, res) {
             if (err)
                 Meteor.blockchainError(err)
             else {
@@ -103,7 +103,7 @@ Template.channelkeys.events({
     'click #changeMasterKeyBtn': (e) => {
         e.preventDefault()
         let newMasterPubKey = $('#avalonpub').val()
-        broadcast.avalon.changePassword(newMasterPubKey,(e,r) => {
+        broadcast.changePassword(newMasterPubKey,(e,r) => {
             if (e) return Meteor.blockchainError(e)
             toastr.success(translate('MASTER_KEY_CHANGE_SUCCESS'),translate('USERS_SUCCESS'))
             ChainUsers.fetchNames([Session.get('activeUsername')], function(){})

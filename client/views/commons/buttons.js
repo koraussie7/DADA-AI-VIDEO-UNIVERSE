@@ -21,7 +21,7 @@
     if (receiver == 'ionomy' || receiver == 'dtube.swap') {
       toastr.warning("Transfers to this account are temporarly disabled as they've probably an outdated software code.")
     } else {
-      broadcast.avalon.transfer(receiver, amount, memo, function(err, res) {
+      broadcast.minima.transfer(receiver, amount, memo, function(err, res) {
         $("#confirmTransfer").removeClass('disabled')
         $("#confirmTransfer > i.loading").addClass('dsp-non')
         $("#confirmTransfer > i.check").removeClass('dsp-non')

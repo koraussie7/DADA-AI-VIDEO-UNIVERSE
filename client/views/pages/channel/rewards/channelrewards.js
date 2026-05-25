@@ -90,7 +90,7 @@ Template.channelrewards.events({
             button = event.target.parentElement
 
         button.classList.add('disabled')
-        broadcast.avalon.claimReward(claim.author, claim.link, function (err, res) {
+        broadcast.claimReward(claim.author, claim.link, function (err, res) {
             if (err) {
                 button.classList.remove('disabled')
                 Meteor.blockchainError(err)

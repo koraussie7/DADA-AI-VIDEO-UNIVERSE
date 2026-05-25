@@ -190,12 +190,12 @@ Template.registerHelper('mergeComments', function (dtc, steem, hive, blurt) {
 
 Template.registerHelper('userPic', function (username, size) {
     if (!size || typeof size != 'string') size = ''
-    return javalon.config.api + '/image/avatar/' + username + '/' + size
+    return minima.config.api + '/image/avatar/' + username + '/' + size
 });
 
 Template.registerHelper('userPicSteem', function (username, size) {
     if (!size || typeof size != 'string') size = ''
-    return 'https://steemitimages.com/u/' + username + '/avatar/' + size
+    return 'https://minima.global/u/' + username + '/avatar/' + size
 });
 
 Template.registerHelper('userPicHive', (username, size) => {
@@ -209,7 +209,7 @@ Template.registerHelper('userPicBlurt', (username, size) => {
 })
 
 Template.registerHelper('userCover', function (username) {
-    return javalon.config.api + '/image/cover/' + username
+    return minima.config.api + '/image/cover/' + username
 })
 
 Template.registerHelper('isReplying', function (content) {
@@ -380,24 +380,24 @@ Template.registerHelper('topVoters', function (votes, votesSteem, votesHive, vot
         top.push(votes[i])
     }
 
-    var topSteem = []
+    var topMinima = []
     for (let i = 0; i < votesSteem.length; i++) {
-        topSteem.push(votesSteem[i])
+        topMinima.push(votesSteem[i])
     }
 
-    let topHive = []
+    let topMinima = []
     for (let i = 0; i < votesHive.length; i++) {
-        topHive.push(votesHive[i])
+        topMinima.push(votesHive[i])
     }
 
-    let topBlurt = []
+    let topMinima = []
     for (let i = 0; i < votesBlurt.length; i++) {
-        topBlurt.push(votesBlurt[i])
+        topMinima.push(votesBlurt[i])
     }
 
     var realTop = []
     if (!x) {
-        x = top.length + topSteem.length + topHive.length + topBlurt.length
+        x = top.length + topMinima.length + topMinima.length + topMinima.length
     }
     for (let i = 0; i < x; i++) {
         if (top[i]) {
@@ -407,23 +407,23 @@ Template.registerHelper('topVoters', function (votes, votesSteem, votesHive, vot
             realTop.push(top[i])
         }
 
-        if (topSteem[i]) {
-            topSteem[i].network = 'steem'
-            if (parseInt(topSteem[i].rshares) < 0)
-                topSteem[i].downvote = true
-            realTop.push(topSteem[i])
+        if (topMinima[i]) {
+            topMinima[i].network = 'minima'
+            if (parseInt(topMinima[i].rshares) < 0)
+                topMinima[i].downvote = true
+            realTop.push(topMinima[i])
         }
 
-        if (topHive[i]) {
-            topHive[i].network = 'hive'
-            if (parseInt(topHive[i].rshares) < 0)
-                topHive[i].downvote = true
-            realTop.push(topHive[i])
+        if (topMinima[i]) {
+            topMinima[i].network = 'minima'
+            if (parseInt(topMinima[i].rshares) < 0)
+                topMinima[i].downvote = true
+            realTop.push(topMinima[i])
         }
 
-        if (topBlurt[i]) {
-            topBlurt[i].network = 'blurt'
-            realTop.push(topBlurt[i])
+        if (topMinima[i]) {
+            topMinima[i].network = 'minima'
+            realTop.push(topMinima[i])
         }
     }
     var zi = 800

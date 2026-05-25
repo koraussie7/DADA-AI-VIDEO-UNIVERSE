@@ -6,7 +6,7 @@ Template.election.rendered = () => {
         onChecked: () => $('.hidedisabledleaders').prop('checked') ? Session.set('hideDisabledLeaders',true) : null,
         onUnchecked: () => !$('.hidedisabledleaders').prop('checked') ? Session.set('hideDisabledLeaders',false): null
     })
-    avalon.getBlockchainHeight((e,height) => {
+    minima.getBlockHeight((e,height) => {
         if (!e)
             Session.set('avalonLastBlock',height.count)
     })
@@ -21,7 +21,7 @@ Template.election.helpers({
         return leaders
     },
     isVotingFor: function(name){
-        var user = Users.findOne({username: Session.get('activeUsername'), network: 'avalon'})
+        var user = Users.findOne({username: Session.get('activeUsername'), network: 'minima'})
         if (user && user.approves && user.approves.indexOf(name) > -1)
             return true
 
@@ -29,7 +29,7 @@ Template.election.helpers({
     },
     myOtherVotes: function(){
         var leaders = Session.get('leaders')
-        var user = Users.findOne({username: Session.get('activeUsername'), network: 'avalon'})
+        var user = Users.findOne({username: Session.get('activeUsername'), network: 'minima'})
         var approves = []
         if (user && user.approves) approves = user.approves
         if (leaders)
@@ -63,7 +63,7 @@ Template.election.events({
     'click #votenew': function() {
         var username = $('#newleader').val()
         $('#newleader').val('')
-        broadcast.avalon.voteLeader(username, function (err, result) {
+        broadcast.voteLeader(username, function (err, result) {
             if (err) Meteor.blockchainError(err)
             else {
                 avalon.getLeaders(function(err, res){
@@ -77,7 +77,7 @@ Template.election.events({
     'click .votetop': function(clickEvent) {
         var button = clickEvent.target
         var username = button.parentElement.getAttribute('data-username')
-        broadcast.avalon.voteLeader(username, function (err, result) {
+        broadcast.voteLeader(username, function (err, result) {
             if (err) Meteor.blockchainError(err)
             else {
                 avalon.getLeaders(function(err, res){
@@ -91,7 +91,7 @@ Template.election.events({
     'click .unvotetop': function(clickEvent) {
         var button = clickEvent.target
         var username = button.parentElement.getAttribute('data-username')
-        broadcast.avalon.unvoteLeader(username, function (err, result) {
+        broadcast.unvoteLeader(username, function (err, result) {
             if (err) Meteor.blockchainError(err)
             else {
                 avalon.getLeaders(function(err, res){

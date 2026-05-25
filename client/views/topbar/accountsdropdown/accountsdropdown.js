@@ -41,13 +41,13 @@ Template.accountsdropdown.rendered = () => {
     $('.dropdownaccounts').dropdown({
         action: (text,value,e) => {
             if ($(e).hasClass('logOut') && $(e).hasClass('logOutAvalon'))
-                Users.remove({username: Session.get('activeUsername'), network: 'avalon'}, () => Session.set('activeUsername', null))
+                // Users.remove (chain only)({username: Session.get('activeUsername'), network: 'minima'}, () => Session.set('activeUsername', null))
             else if ($(e).hasClass('logOut') && $(e).hasClass('logOutHive'))
-                Users.remove({username: Session.get('activeUsernameHive'), network: 'hive'}, () => Session.set('activeUsernameHive', null))
+                // Users.remove (chain only)({username: Session.get('activeUsername'), network: 'minima'}, () => Session.set('activeUsername', null))
             else if ($(e).hasClass('logOut') && $(e).hasClass('logOutSteem'))
-                Users.remove({username: Session.get('activeUsernameSteem'), network: 'steem'}, () => Session.set('activeUsernameSteem', null))
+                // Users.remove (chain only)({username: Session.get('activeUsername'), network: 'minima'}, () => Session.set('activeUsername', null))
             else if ($(e).hasClass('logOut') && $(e).hasClass('logOutBlurt'))
-                Users.remove({username: Session.get('activeUsernameBlurt'), network: 'blurt'}, () => Session.set('activeUsernameBlurt', null))
+                // Users.remove (chain only)({username: Session.get('activeUsername'), network: 'minima'}, () => Session.set('activeUsername', null))
         }
     })
 
@@ -99,9 +99,9 @@ Template.accountsdropdown.refreshNetworkSwitch = () => {
 
 Template.accountsdropdown.helpers({
     incompleteLogin: () => {
-        if (!Session.get('activeUsernameSteem')
-          || !Session.get('activeUsernameHive')
-          || !Session.get('activeUsernameBlurt')
+        if (!Session.get('activeUsername')
+          || !Session.get('activeUsername')
+          || !Session.get('activeUsername')
           || !Session.get('activeUsername')) return true
         else return false
     },
@@ -109,26 +109,26 @@ Template.accountsdropdown.helpers({
         return Users.findOne({username: Session.get('activeUsername')})
     },
     mainUserSteem: function() {
-        return Users.findOne({username: Session.get('activeUsernameSteem')})
+        return Users.findOne({username: Session.get('activeUsername')})
     },
     mainUserHive: () => {
-        return Users.findOne({username: Session.get('activeUsernameHive')})
+        return Users.findOne({username: Session.get('activeUsername')})
     },
     mainUserBlurt: () => {
-        return Users.findOne({username: Session.get('activeUsernameBlurt')})
+        return Users.findOne({username: Session.get('activeUsername')})
     },
     topbarAvatarUrl: () => {
-        if (Session.get('activeUsername')) return javalon.config.api + '/image/avatar/' + Session.get('activeUsername')
-        else if (Session.get('activeUsernameHive')) return 'https://images.hive.blog/u/' + Session.get('activeUsernameHive') + '/avatar'
-        else if (Session.get('activeUsernameSteem')) return 'https://steemitimages.com/u/' + Session.get('activeUsernameSteem') + '/avatar'
-        else if (Session.get('activeUsernameBlurt')) return 'https://imgp.blurt.world/profileimage/' + Session.get('activeUsernameBlurt')
-        else return javalon.config.api + '/image/avatar/null'
+        if (Session.get('activeUsername')) return minima.config.api + '/image/avatar/' + Session.get('activeUsername')
+        else if (Session.get('activeUsername')) return 'https://images.hive.blog/u/' + Session.get('activeUsername') + '/avatar'
+        else if (Session.get('activeUsername')) return 'https://minima.global/u/' + Session.get('activeUsername') + '/avatar'
+        else if (Session.get('activeUsername')) return 'https://imgp.blurt.world/profileimage/' + Session.get('activeUsername')
+        else return minima.config.api + '/image/avatar/null'
     },
     topbarUsername: () => {
         if (Session.get('activeUsername')) return Session.get('activeUsername')
-        else if (Session.get('activeUsernameHive')) return Session.get('activeUsernameHive')
-        else if (Session.get('activeUsernameSteem')) return Session.get('activeUsernameSteem')
-        else if (Session.get('activeUsernameBlurt')) return Session.get('activeUsernameBlurt')
+        else if (Session.get('activeUsername')) return Session.get('activeUsername')
+        else if (Session.get('activeUsername')) return Session.get('activeUsername')
+        else if (Session.get('activeUsername')) return Session.get('activeUsername')
         else return ''
     },
     voteWeight: () => {

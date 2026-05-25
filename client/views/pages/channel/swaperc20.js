@@ -1,6 +1,6 @@
 Template.swaperc20.helpers({
     balanceAvalon: function() {
-        return avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
+        return avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' }))
     },
     balanceErc20: function() {
         return Session.get('metamaskBalance')
@@ -52,7 +52,7 @@ Template.swaperc20.helpers({
         if (!Session.get('swapFee')) return false
         if (!Session.get('metamaskNetwork') || !metamask.networks[parseInt(window.ethereum.chainId)]) return false
 
-        var balance = avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
+        var balance = avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' }))
         if (Session.get('metamaskSwapInverse'))
             balance = Session.get('metamaskBalance')
         var amount = Session.get('swapAmount')
@@ -112,7 +112,7 @@ Template.swaperc20.events({
                     break
             }
             var receiver = 'dtube.swap'
-            broadcast.avalon.transfer(receiver, amount, memo, function(err, res) {
+            broadcast.transfer(receiver, amount, memo, function(err, res) {
                 $("#confirmSwap").removeClass('disabled')
                 $("#confirmSwap > i.loading").addClass('dsp-non')
                 $("#confirmSwap > i.check").removeClass('dsp-non')

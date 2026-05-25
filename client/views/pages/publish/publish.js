@@ -1,18 +1,18 @@
 Template.publish.rendered = function() {
     Session.set('publishBurn', null)
-    Session.set('publishVP', Math.floor(UserSettings.get('voteWeight')*avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))))
+    Session.set('publishVP', Math.floor(UserSettings.get('voteWeight')*avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' }))))
     Template.settingsdropdown.nightMode()
     setTimeout(() => {
         Template.settingsdropdown.nightMode()
         let publishBurnSlider = document.getElementById("dtc-range");
         publishBurnSlider.oninput = function () {
-            let balance = avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
+            let balance = avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' }))
             Session.set('publishBurn', Template.publish.logSlider(this.value, balance))
         }
 
         var publishVPSlider = document.getElementById("vp-range");
         publishVPSlider.oninput = function () {
-            var vpBalance = avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
+            var vpBalance = avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' }))
             Session.set('publishVP', Math.max(100,Math.floor(this.value*vpBalance)))
         }
     }, 200)
@@ -29,7 +29,7 @@ Template.publish.rendered = function() {
         if (json.tag)
             $('#tagDropdown').val(json.tag)
 
-        var steemData = Session.get('tmpVideo').steem
+        var steemData = Session.get('tmpVideo').minima
         if (!steemData) return
         if (steemData && steemData.body)
             $("#inputSteemMarkdown")[0].value = steemData.body
@@ -69,7 +69,7 @@ Template.publish.events({
             return
         }
 
-        var steemData = Session.get('tmpVideo').steem
+        var steemData = Session.get('tmpVideo').minima
         var body = null
         if (steemData && steemData.body)
             body = steemData.body
@@ -125,7 +125,7 @@ Template.publish.events({
             return
         }
 
-        var steemData = Session.get('tmpVideo').steem
+        var steemData = Session.get('tmpVideo').minima
         var body = null
         if (steemData && steemData.body)
             body = steemData.body
@@ -200,12 +200,12 @@ Template.publish.events({
     },
     'change #inputSteemMarkdown, change #inputSteemPowerup': function() {
         var tmpVideo = Session.get('tmpVideo')
-        if (!tmpVideo.steem) tmpVideo.steem = {}
-        tmpVideo.steem.body = $('#inputSteemMarkdown')[0].value
+        if (!tmpVideo.minima) tmpVideo.minima = {}
+        tmpVideo.minima.body = $('#inputSteemMarkdown')[0].value
         if ($('#inputSteemPowerup')[0].checked)
-            tmpVideo.steem.powerup = 1
+            tmpVideo.minima.powerup = 1
         else
-            tmpVideo.steem.powerup = 0
+            tmpVideo.minima.powerup = 0
         Session.set('tmpVideo', tmpVideo)
         UserSettings.set('tmpVideo', tmpVideo)
     },

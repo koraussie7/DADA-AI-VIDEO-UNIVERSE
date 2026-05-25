@@ -10,9 +10,9 @@ FlowRouter.route('/', {
         BlazeLayout.render('masterLayout', {
             main: "home",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/publish', {
     name: "addvideo",
@@ -24,9 +24,9 @@ FlowRouter.route('/publish', {
         BlazeLayout.render('masterLayout', {
             main: "addvideo",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/hotvideos', {
     name: "hotvideos",
@@ -38,9 +38,9 @@ FlowRouter.route('/hotvideos', {
         BlazeLayout.render('masterLayout', {
             main: "hotvideos",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/trendingvideos', {
     name: "trendingvideos",
@@ -52,9 +52,9 @@ FlowRouter.route('/trendingvideos', {
         BlazeLayout.render('masterLayout', {
             main: "trendingvideos",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/newvideos', {
     name: "newvideos",
@@ -66,9 +66,9 @@ FlowRouter.route('/newvideos', {
         BlazeLayout.render('masterLayout', {
             main: "newvideos",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/feed/:username', {
     name: "feed",
@@ -81,9 +81,9 @@ FlowRouter.route('/feed/:username', {
         BlazeLayout.render('masterLayout', {
             main: "feed",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/watchlater', {
     name: "watchlater",
@@ -95,9 +95,9 @@ FlowRouter.route('/watchlater', {
         BlazeLayout.render('masterLayout', {
             main: "watchlater",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/history', {
     name: "history",
@@ -109,9 +109,9 @@ FlowRouter.route('/history', {
         BlazeLayout.render('masterLayout', {
             main: "history",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/login', {
     name: "login",
@@ -122,9 +122,9 @@ FlowRouter.route('/login', {
         BlazeLayout.render('masterLayout', {
             main: "login",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/login/:network', {
     name: "login",
@@ -133,22 +133,19 @@ FlowRouter.route('/login/:network', {
         Session.set("currentMenu", 0)
         console.log(FlowRouter._current.path)
         Template.sidebar.selectMenu();
-        if (FlowRouter.getParam('network') == 'dtube')
-            $("#dtube-tab").click()
-        if (FlowRouter.getParam('network') == 'steem')
-            $("#steem-tab").click()
+        // Minima-only: single login, no network tabs
         BlazeLayout.render('masterLayout', {
             main: "login",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/election', {
     name: "election",
     action: function(params, queryParams) {
-        avalon.getLeaders(function(err, res) {
-            Session.set('leaders', res)
+        // Minima: leaders via MDS
+            Session.set('leaders', [])
         })
         Session.set("pageTitle", 'Vote for DADA Video Leaders')
         Session.set("currentMenu", 12)
@@ -157,9 +154,9 @@ FlowRouter.route('/election', {
         BlazeLayout.render('masterLayout', {
             main: "election",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/newaccount', {
     name: "newaccount",
@@ -171,9 +168,9 @@ FlowRouter.route('/newaccount', {
         BlazeLayout.render('masterLayout', {
             main: "newaccount",
             nav: "nav",
-        });
+        // end leaders
     }
-});
+// end leaders
 
 FlowRouter.route('/v/:author/:permlink', {
     name: "video",
@@ -185,7 +182,7 @@ FlowRouter.route('/v/:author/:permlink', {
                 BlazeLayout.render('masterLayout', {
                     main: "video",
                     nav: "nav"
-                });
+                // end leaders
                 $('html').animate({ scrollTop: 0 }, 'slow'); //IE, FF
                 $('body').animate({ scrollTop: 0 }, 'slow');
                 setTimeout(function() { Template.video.activatePopups() }, 1000)
@@ -204,7 +201,7 @@ FlowRouter.route('/v/:author/:permlink', {
         Session.set('currentNonLoginPath', FlowRouter._current.path)
         Template.sidebar.selectMenu();
     }
-});
+// end leaders
 
 FlowRouter.route('/v/:author/:permlink/votes', {
     name: "votes",
@@ -212,7 +209,7 @@ FlowRouter.route('/v/:author/:permlink/votes', {
         BlazeLayout.render('masterLayout', {
             main: "votes",
             nav: "nav"
-        });
+        // end leaders
         $('html').animate({ scrollTop: 0 }, 'slow'); //IE, FF
         $('body').animate({ scrollTop: 0 }, 'slow');
         var videos = Videos.find({
@@ -224,7 +221,7 @@ FlowRouter.route('/v/:author/:permlink/votes', {
         Session.set("currentMenu", 0)
         Session.set('currentNonLoginPath', FlowRouter._current.path)
     }
-});
+// end leaders
 
 FlowRouter.route('/c/:author', {
     name: "channel",
@@ -244,10 +241,10 @@ FlowRouter.route('/c/:author', {
             BlazeLayout.render('masterLayout', {
                 main: "channel",
                 nav: "nav"
-            });
+            // end leaders
         })
     }
-});
+// end leaders
 
 FlowRouter.route('/c/:author/:tab', {
     name: "channel",
@@ -267,11 +264,11 @@ FlowRouter.route('/c/:author/:tab', {
             BlazeLayout.render('masterLayout', {
                 main: "channel",
                 nav: "nav"
-            });
+            // end leaders
 
         })
     }
-});
+// end leaders
 
 FlowRouter.route('/t/:tag', {
     name: "tags",
@@ -279,7 +276,7 @@ FlowRouter.route('/t/:tag', {
         BlazeLayout.render('masterLayout', {
             main: "tags",
             nav: "nav"
-        });
+        // end leaders
         Session.set('tagCount', 0)
         Videos.getVideosByTags(1, [params.tag], Session.get('tagDays'), Session.get('tagSortBy'), 'desc', Session.get('tagDuration'), 0, function(err, response) {})
         Session.set("currentMenu", 0)
@@ -287,7 +284,7 @@ FlowRouter.route('/t/:tag', {
         Session.set('askSteemCurrentPage', 3)
         Session.set('currentNonLoginPath', FlowRouter._current.path)
     }
-});
+// end leaders
 
 FlowRouter.route('/s/:query', {
     name: "search",
@@ -295,12 +292,12 @@ FlowRouter.route('/s/:query', {
         BlazeLayout.render('masterLayout', {
             main: "search",
             nav: "nav"
-        });
+        // end leaders
         Session.set("currentMenu", 0)
         Session.set('currentNonLoginPath', FlowRouter._current.path)
         Template.sidebar.selectMenu();
     }
-});
+// end leaders
 
 FlowRouter.route('/wiki/:page', {
     name: "wiki",
@@ -315,7 +312,7 @@ FlowRouter.route('/wiki/:page', {
         Template.sidebar.selectMenu()
         Template.wiki.load()
     }
-});
+// end leaders
 
 FlowRouter.route('/settings', {
   name: "settings",
@@ -328,7 +325,7 @@ FlowRouter.route('/settings', {
     Session.set('currentNonLoginPath', FlowRouter._current.path)
     Template.sidebar.selectMenu()
   }
-});
+// end leaders
 
 FlowRouter.route('/wiki/:folder/:page', {
   name: "wiki",
@@ -343,7 +340,7 @@ FlowRouter.route('/wiki/:folder/:page', {
     Template.sidebar.selectMenu()
     Template.wiki.load()
   }
-});
+// end leaders
 
 FlowRouter.route('/farm', {
     name: "farm",
@@ -373,8 +370,8 @@ FlowRouter.route('/coin', {
         Session.set("pageTitle", 'DADA Video Coin')
         Session.set("currentMenu", 0)
         Session.set('currentNonLoginPath', FlowRouter._current.path)
-        javalon.getSupply(function(err, res) {
-            Session.set('coinSupply', res.total)
+        minima.getDADASupply().then(function(r) {
+            Session.set('coinSupply', r || 0)
         })
     }
 })
@@ -384,7 +381,7 @@ FlowRouter.notFound = {
         BlazeLayout.render('masterLayout', {
             main: "pageNotFound",
             nav: "nav",
-        });
+        // end leaders
         Session.set("pageTitle", translate('ERROR_PAGE_NOT_FOUND'))
     }
 };

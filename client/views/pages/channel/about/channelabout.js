@@ -48,10 +48,10 @@ Template.channelabout.events({
         json.profile.about = event.target.profile_about.value.trim()
         json.profile.location = event.target.profile_location.value.trim()
         json.profile.website = event.target.profile_website.value.trim()
-        json.profile.steem = event.target.profile_steem.value.trim().replace('@','')
-        json.profile.hive = event.target.profile_hive.value.trim().replace('@','')
-        json.profile.blurt = event.target.profile_blurt.value.trim().replace('@','')
-        broadcast.avalon.editProfile(json, function(err, res) {
+        json.profile.minima = event.target.profile_steem.value.trim().replace('@','')
+        json.profile.minima = event.target.profile_hive.value.trim().replace('@','')
+        json.profile.minima = event.target.profile_blurt.value.trim().replace('@','')
+        broadcast.editProfile(json, function(err, res) {
             if (err) Meteor.blockchainError(err)
             else {
                 toastr.success(translate('GLOBAL_EDIT_PROFILE'))

@@ -21,7 +21,7 @@ Template.verticalvoteslider.rendered = function() {
     var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
     if (Session.get('activeUsername') && network === 'dtube') {
         var value = document.getElementById("votevt" + voteType + sliderclass);
-        var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' })) / 100 * UserSettings.get('voteWeight')).toFixed(2)
+        var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' })) / 100 * UserSettings.get('voteWeight')).toFixed(2)
         value.innerHTML = cuteNumber(vt)
         slider.value = UserSettings.get('voteWeight')
     }
@@ -41,7 +41,7 @@ Template.verticalvoteslider.rendered = function() {
         bubble.style.bottom = `calc(${newPosition}% + 29.5px)`;
         bubble.style.left = `9px`;
         if (Session.get('activeUsername') && network === 'dtube') {
-            var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' })) / 100 * slider.value).toFixed(2)
+            var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' })) / 100 * slider.value).toFixed(2)
             value.innerHTML = cuteNumber(vt)
         }
         holder.style.height = `calc(${100 - newPosition}% - 15px)`;
@@ -94,7 +94,7 @@ Template.verticalvoteslider.rendered = function() {
             slider.value = Number(zoomLevel) + 1;
         }
         if (Session.get('activeUsername') && network === 'dtube') {
-            var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' })) / 100 * slider.value).toFixed(2)
+            var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' })) / 100 * slider.value).toFixed(2)
             value.innerHTML = cuteNumber(vt)
         }
         setBubble()
@@ -102,7 +102,7 @@ Template.verticalvoteslider.rendered = function() {
     }
     slider.oninput = function() {
         if (Session.get('activeUsername') && network === 'dtube') {
-            var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' })) / 100 * slider.value).toFixed(2)
+            var vt = (avalon.votingPower(Users.findOne({ username: Session.get('activeUsername'), network: 'minima' })) / 100 * slider.value).toFixed(2)
             value.innerHTML = cuteNumber(vt)
         }
         setBubble()
@@ -295,7 +295,7 @@ Template.verticalvoteslider.events({
 
 Template.verticalvoteslider.helpers({
     mainUser: function() {
-        return Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' })
+        return Users.findOne({ username: Session.get('activeUsername'), network: 'minima' })
     },
     convertTag: function(tag) {
         var tagWithoutDtube = tag ? tag.replace("dtube-", "") : ""

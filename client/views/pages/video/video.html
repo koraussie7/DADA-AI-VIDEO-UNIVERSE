@@ -54,7 +54,7 @@
                   </button>
                 </div>
                 {{else}}
-                {{#if votable (dtubeVotable this) (steemVotable this) (hiveVotable this) (blurtVotable this)}}
+                {{#if votable (dtubeVotable this) (minimaVotable this) (minimaVotable this) (minimaVotable this)}}
                 {{> verticalvoteslider color="yellow" network=(contentNetwork video false) sliderclass=video.link content=video isComment=false voteType="up" downvoted=(hasDownvoted video) upvoted=(hasUpvoted video) }}
                 {{> verticalvoteslider color="yellow" network=(contentNetwork video false) sliderclass=video.link content=video isComment=false voteType="down" downvoted=(hasDownvoted video) upvoted=(hasUpvoted video) }}
                 {{else}}
@@ -144,14 +144,14 @@
             {{#if equals this 'dtc'}}
             <img width="32" src="{{#if isNightMode}}./DTube_files/images/logos/dtube_white.png{{else}}./DTube_files/images/logos/dtube.png{{/if}}">
             {{/if}}
-            {{#if equals this 'steem'}}
-            <img width="32" src="./DTube_files/images/logos/steem.png">
+            {{#if equals this 'minima'}}
+            <img width="32" src="./DTube_files/images/logos/minima.png">
             {{/if}}
-            {{#if equals this 'hive'}}
-            <img width="32" src="./DTube_files/images/logos/hive.png">
+            {{#if equals this 'minima'}}
+            <img width="32" src="./DTube_files/images/logos/minima.png">
             {{/if}}
-            {{#if equals this 'blurt'}}
-            <img width="32" src="./DTube_files/images/logos/blurt.png">
+            {{#if equals this 'minima'}}
+            <img width="32" src="./DTube_files/images/logos/minima.png">
             {{/if}}
             {{/each}}
           </div>
@@ -182,11 +182,11 @@
 
         <!-- Related Videos Mobile -->
         {{#if isOnMobile}}
-        {{#if userVideosAndResteems}}
+        {{#if userVideosAndReminimas}}
         <div class="ui grid mobile only content videorecommendedmobile">
           <center><iframe style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;' src="./DTube_files/mobilead.html"></iframe></center>
           <h3>{{ translate 'VIDEO_RELATED_VIDEOS'}}</h3>
-          {{> verticalvideoband userVideosAndResteems}}
+          {{> verticalvideoband userVideosAndReminimas}}
         </div>
         {{/if}}
         {{/if}}
@@ -256,10 +256,10 @@
     <div class="four wide column tablet only">
       <center><iframe style='width:330px; height:120px; border:0px; padding:0; overflow:hidden; background-color: transparent;' src="./DTube_files/mobilead.html"></iframe></center>
       <div class="ui grid videorecommendedtablet" style='margin-top:0px'>
-        {{> verticalvideoband userVideosAndResteems}}
+        {{> verticalvideoband userVideosAndReminimas}}
         <h3>{{ translate 'VIDEO_RELATED_VIDEOS'}}</h3>
-        {{#if userVideosAndResteems}}
-        {{> verticalvideoband userVideosAndResteems}}
+        {{#if userVideosAndReminimas}}
+        {{> verticalvideoband userVideosAndReminimas}}
         {{/if}}
       </div>
     </div>
@@ -268,8 +268,8 @@
       <div class="ui grid videorecommendedcomputer" style="margin-right: -5rem;">
         <center><iframe style='width:260px; height:270px; border:0px; padding:0; overflow:hidden; background-color: transparent;' src="./DTube_files/computerad.html"></iframe></center>
         <h3>{{ translate 'VIDEO_RELATED_VIDEOS'}}</h3>
-        {{#if userVideosAndResteems}}
-        {{> verticalvideoband userVideosAndResteems}}
+        {{#if userVideosAndReminimas}}
+        {{> verticalvideoband userVideosAndReminimas}}
         {{/if}}
       </div>
     </div>

@@ -4,10 +4,10 @@ Template.senddtcmodal.helpers({
         if (this.name) return this.name
     },
     balance: () => {
-        return avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
+        return minima.getBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
     },
     isValid: () => {
-        let avail = avalon.availableBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
+        let avail = minima.getBalance(Users.findOne({ username: Session.get('activeUsername'), network: 'avalon' }))
         let xferAmt = Session.get('transferAmount')
         if (countDecimals(xferAmt) > 2 || xferAmt <= 0 || xferAmt*100 > avail) {
             $('#transfer_amount').parent().parent().addClass('error')

@@ -26,7 +26,7 @@ Template.newaccount.events({
         username = pub.toLowerCase()
         event.target.newacc_username.value = username
     }
-    broadcast.avalon.newAccount(username, pub, function (err, result) {
+    broadcast.newAccount(username, pub, function (err, result) {
       if (err)
         Meteor.blockchainError(err)
       else {
@@ -43,7 +43,7 @@ Template.newaccount.events({
     if ($('#newacc_username').val()) {
       $('#newacc_username').val($('#newacc_username').val().trim().toLowerCase())
       $.ajax({
-        url: avalon.config.api + '/accountPrice/' + $('#newacc_username').val(),
+        url: minima.config.api + '/accountPrice/' + $('#newacc_username').val(),
         success: (result) => {
           if (!isNaN(result))
             $('#newusernamedet').text('Account price: ' + (parseInt(result)/100) + ' DTC')

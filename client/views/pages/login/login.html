@@ -4,95 +4,51 @@
     <div class='row' style='margin: 15px;'>
       <h1>Login</h1>
       <p>
-        DTube supports authentication with multiple networks at the same time.
-        Please select a network:
+        Welcome to DADA-Video-Universe! Sign in with your Minima address.
       </p>
     </div>
 
-    {{#if noAvalonLogin}}
-    <div class="column loginOption" data-network="Avalon">
+    {{#if noMinimaLogin}}
+    <div class="column loginOption" data-network="Minima">
       {{#if isNightMode}}
       <img src="./DTube_files/images/logos/dtube_white.png">
       {{else}}
       <img src="./DTube_files/images/logos/dtube.png">
       {{/if}}
-      <span>DTube</span>
-    </div>
-    {{else}}
-    <div class="column loginOptionDisabled" data-network="Avalon">
-      {{#if isNightMode}}
-      <img src="./DTube_files/images/logos/dtube_white.png">
-      {{else}}
-      <img src="./DTube_files/images/logos/dtube.png">
-      {{/if}}
-      <span>{{translate 'LOGIN_LOGGED_IN'}} <strong>{{activeUsername}}</strong></span>
-      <br /><br />
-      <button class="ui red button logOut" data-network='dtc'>Log-out</button>
+      <span>Minima MDS</span>
     </div>
     {{/if}}
-    {{#each randomOrder}}
-    {{#if equals this 'steem'}}
-    {{#if noSteemLogin}}
-    <div class="column loginOption" data-network="Steem">
-      <img src="./DTube_files/images/logos/steem.png">
-      <span>Steem</span>
-    </div>
-    {{else}}
-    <div class="column loginOptionDisabled" data-network="Steem">
-      <img src="./DTube_files/images/logos/steem.png">
-      <span>{{translate 'LOGIN_LOGGED_IN'}} <strong>{{activeUsernameSteem}}</strong></span>
-      <br /><br />
-      <button class="ui red button logOut" data-network='{{this}}'>Log-out</button>
-    </div>
-    {{/if}}
-    {{/if}}
-    {{#if equals this 'hive'}}
-    {{#if noHiveLogin}}
-    <div class="column loginOption" data-network="Hive">
-      <img src="./DTube_files/images/logos/hive.png">
-      <span>Hive</span>
-    </div>
-    {{else}}
-    <div class="column loginOptionDisabled" data-network="Hive">
-      <img src="./DTube_files/images/logos/hive.png">
-      <span>{{translate 'LOGIN_LOGGED_IN'}} <strong>{{activeUsernameHive}}</strong></span>
-      <br /><br />
-      <button class="ui red button logOut" data-network='{{this}}'>Log-out</button>
-    </div>
-    {{/if}}
-    {{/if}}
-    {{#if equals this 'blurt'}}
-    {{#if noBlurtLogin}}
-    <div class="column loginOption" data-network="Blurt">
-      <img src="./DTube_files/images/logos/blurt.png">
-      <span>Blurt</span>
-    </div>
-    {{else}}
-    <div class="column loginOptionDisabled" data-network="Blurt">
-      <img src="./DTube_files/images/logos/blurt.png">
-      <span>{{translate 'LOGIN_LOGGED_IN'}} <strong>{{activeUsernameBlurt}}</strong></span>
-      <br /><br />
-      <button class="ui red button logOut" data-network='{{this}}'>Log-out</button>
-    </div>
-    {{/if}}
-    {{/if}}
-    {{/each}}
-    {{/if}}
-
-    {{#if isAvalonAuth}}
-    {{>loginavalon}}
-    {{/if}}
-
-    {{#if isHiveAuth}}
-    {{>loginhive}}
-    {{/if}}
-
-    {{#if isBlurtAuth}}
-    {{>loginblurt}}
-    {{/if}}
-
-    {{#if isSteemAuth}}
-    {{>loginsteem}}
     {{/if}}
   </div>
+
+  {{> loginMinima}}
+  {{> loginMinimaSignature}}
+</template>
+
+<template name='loginMinima'>
+  {{#if isLoggingIn}}
+  <div class="ui segment" style="max-width:400px;margin:auto;margin-top:20px;">
+    <h3>Connect to Minima</h3>
+    <p>Click below to sign in with your Minima MDS node.</p>
+    <button id="loginMinimaDirect" class="ui primary button">Sign in with Minima</button>
+    
+    <div class="ui divider"></div>
+    <p><small>Or enter your address manually:</small></p>
+    <div class="ui action input" style="width:100%">
+      <input type="text" id="minimaAddressInput" placeholder="0x...">
+      <button class="ui button" onclick="Template.loginMinima.__helpers[' click #loginMinimaDirect']">Login</button>
+    </div>
+  </div>
+  {{/if}}
+</template>
+
+<template name='loginMinimaSignature'>
+  {{#if signaturePending}}
+  <div class="ui segment" style="max-width:400px;margin:auto;margin-top:20px;">
+    <div class="ui active dimmer">
+      <div class="ui text loader">Signing in with Minima...</div>
+    </div>
+    <p>Please approve the signature request in your Minima node.</p>
+  </div>
+  {{/if}}
 </template>

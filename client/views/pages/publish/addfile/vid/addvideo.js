@@ -465,9 +465,9 @@ Template.addvideoformfile.rendered = function() {
               method: 'GET',
               success: (result) => {
                 if (net == 'hive')
-                  broadcast.hive.decrypt_memo(result.encrypted_memo,(err,decryptedMemo) => uploadEndpointAuthCb(err,value,decryptedMemo))
+                  /* broadcast.hive.decrypt_memo disabled */(result.encrypted_memo,(err,decryptedMemo) => uploadEndpointAuthCb(err,value,decryptedMemo))
                 else
-                  broadcast.avalon.decrypt_memo(result.encrypted_memo,(err,decryptedMemo) => uploadEndpointAuthCb(err,value,decryptedMemo))
+                  /* broadcast.avalon.decrypt_memo disabled */(result.encrypted_memo,(err,decryptedMemo) => uploadEndpointAuthCb(err,value,decryptedMemo))
               },
               error: (req,status) => handleUploadEndpointCheckError(req,status)
             })
